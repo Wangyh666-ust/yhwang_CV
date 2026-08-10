@@ -8,6 +8,8 @@ category: projects
 
 **Machine Learning Project · Oct 2024 – Dec 2024**
 
-Applied a multilayer perceptron (MLP) to build a spam classification model, achieving 95% accuracy and 0.045 binary cross-entropy loss.
+- **What:** A spam classification model.
+- **How:** Applied a multilayer perceptron (MLP).
+- **Result:** **95% accuracy**, **0.045** binary cross-entropy loss.
 
 > Detailed write-up coming soon.

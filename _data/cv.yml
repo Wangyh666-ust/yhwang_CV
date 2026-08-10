@@ -50,6 +50,17 @@ cv:
         highlights:
           - Developing a perception-action pipeline using PyTorch and reinforcement learning to enable embodied agents to execute visual search and manipulation tasks based on natural language instructions.
 
+    Work Experience:
+      - company: Zhijie Exploration Technology (深圳智界探索)
+        position: Computer Vision Intern
+        location: Shenzhen, China
+        start_date: 2026-06
+        end_date: present
+        highlights:
+          - Researched and validated construction schemes for food ground-truth volume datasets, and built a small-sample dataset to benchmark the company's single-view and multi-view food volume reconstruction algorithms on iOS and Android devices.
+          - Researched, tested, and built a complete metric-scale, multi-view 3D reconstruction pipeline for tabletop food (a sparse-feature, weakly-textured, small-object reconstruction task) using VGGT-Omega multi-view point cloud reconstruction plus container reconstruction, achieving volume MAPE = 19.5% on the test set and improving on the previous single-view pipeline (MAPE = 25%).
+          - Contributed to the iOS RGBD data-collection app by adding post-capture display of key quality metrics (overall photo confidence score, server upload ID), making data collection quality more controllable.
+
     Projects:
       - name: Clustering-Based CAPTCHA Model
         summary: Built a clustering-based CAPTCHA model in pure NumPy, applicable for human authorization.

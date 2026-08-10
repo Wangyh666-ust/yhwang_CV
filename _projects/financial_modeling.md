@@ -8,9 +8,7 @@ category: projects
 
 **Self-Study · Summer 2025**
 
-Self-studied financial data analysis and quantitative modeling:
-
-- Mastered pandas for financial data processing, time-series cleaning, and analysis.
-- Implemented the Markowitz mean-variance model and the Black-Litterman (BL) model for portfolio optimization and asset allocation.
+- **Data analysis:** Mastered pandas for financial data processing, time-series cleaning, and analysis.
+- **Portfolio optimization:** Implemented the Markowitz mean-variance model and the Black-Litterman (BL) model for asset allocation.
 
 > Detailed write-up coming soon.

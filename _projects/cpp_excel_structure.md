@@ -8,6 +8,8 @@ category: projects
 
 **C++ Project · May 2025**
 
-Designed and built a data structure that mimics Excel behavior, combining a binary search tree with a hashtable for efficient data storage and retrieval.
+- **What:** A data structure that mimics Excel behavior.
+- **How:** Combines a binary search tree (BST) with a hashtable.
+- **Goal:** Efficient data storage and retrieval.
 
 > Detailed write-up coming soon.
