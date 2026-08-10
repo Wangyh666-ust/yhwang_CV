@@ -1,12 +1,12 @@
 ---
 layout: page
-title: projects
+title: PROJECTS
 permalink: /projects/
 description: Selected research and course projects — click any card for the full detail page.
 nav: true
 nav_order: 3
 display_categories: [research, projects]
-horizontal: false
+horizontal: true
 ---
 
 <!-- pages/projects.md -->
