@@ -10,11 +10,15 @@ toc:
 
 <div class="lang-en" markdown="1">
 
+<div class="project-overview" markdown="1">
+
 **Computer Vision Intern · Zhijie Exploration Technology (深圳智界探索), Shenzhen · Summer 2026**
 
 **In one sentence:** the company needed trustworthy, true-scale food volumes as ground truth — I surveyed the scanner market, ran a head-to-head experiment between the two best-fit consumer scanners, and built an automated pipeline that turned the winner into a 90-sample dataset.
 
 *This page covers the ground-truth dataset. The volume-estimation pipeline it was built to validate is on the companion page: [Metric-Scale 3D Food Reconstruction]({{ '/projects/food_3d_reconstruction/' | relative_url }}).*
+
+</div>
 
 ## Part 1 — Background: why a scanner at all
 
@@ -106,11 +110,15 @@ This dataset became the ground truth for validating the five-view volume-estimat
 
 <div class="lang-zh" markdown="1">
 
+<div class="project-overview" markdown="1">
+
 **计算机视觉实习生 · 智界探索科技（深圳）· 2026 年夏**
 
 **一句话概括：** 公司需要可信的、真实尺度的食物体积作为真值——我调研了扫描仪市场，对两款最符合需求的消费级扫描仪做了正面对比实验，并为胜出者搭建了自动化采集链路，产出 90 个样本的数据集。
 
 *本页聚焦真值数据集本身；这个数据集所要验证的体积估算流水线，见配套页面：[真实尺度 3D 食物重建]({{ '/projects/food_3d_reconstruction/' | relative_url }})。*
+
+</div>
 
 ## 一、项目背景：为什么需要扫描仪
 

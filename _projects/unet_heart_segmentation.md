@@ -10,11 +10,15 @@ toc:
 
 <div class="lang-en" markdown="1">
 
+<div class="project-overview" markdown="1">
+
 **Research Exchange Student · Seoul National University · HKUST–SNU SPIA Program · Summer 2025 (49 days)**
 
 **In one sentence:** with medical X-ray data almost impossible to obtain, we **manufactured our own training data** — assembling a human torso in Blender and simulating X-ray imaging — then trained a U-Net that segments the heart in **real** chest X-rays it had never seen, reaching **~97% accuracy and 0.7992 F1** against hand-labeled masks.
 
-> The exchange project was scoped for **4 people**; in the end **2 of us** carried it, and in 49 days we completed the first two of the three planned stages. What the third stage would have been — and why we stopped — is at the end of this page.
+*The exchange project was scoped for **4 people**; in the end **2 of us** carried it, and in 49 days we completed the first two of the three planned stages. What the third stage would have been — and why we stopped — is at the end of this page.*
+
+</div>
 
 ## Part 1 — Background: the goal and the plan
 
@@ -98,11 +102,15 @@ The final stage — lifting the 2D detection into a 3D estimate of heart positio
 
 <div class="lang-zh" markdown="1">
 
+<div class="project-overview" markdown="1">
+
 **科研交换生 · 首尔国立大学 · 港科大–首尔大 SPIA 交换项目 · 2025 年夏（49 天）**
 
 **一句话概括：** 医疗 X 光数据几乎无法获得，于是我们**自己制造训练数据**——在 Blender 里拼装人体躯干、模拟 X 光成像物理——再训练 U-Net，让它在**从未见过的真实**胸腔 X 光中分割心脏，对人工标注的掩膜达到 **约 97% 准确率、0.7992 F1 分数**。
 
-> 这个交换项目原本按 **4 人**规模规划，最后实际由 **2 人**完成；49 天内我们完成了原计划三个阶段中的前两个。第三阶段是什么、为什么停下来，见本页末尾。
+*这个交换项目原本按 **4 人**规模规划，最后实际由 **2 人**完成；49 天内我们完成了原计划三个阶段中的前两个。第三阶段是什么、为什么停下来，见本页末尾。*
+
+</div>
 
 ## 一、项目背景：目标与计划
 

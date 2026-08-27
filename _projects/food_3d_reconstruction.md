@@ -10,11 +10,15 @@ toc:
 
 <div class="lang-en" markdown="1">
 
+<div class="project-overview" markdown="1">
+
 **Computer Vision Intern · Zhijie Exploration Technology (深圳智界探索), Shenzhen · Summer 2026**
 
 **In one sentence:** given five RGB-D views of a plated dish, this pipeline outputs the food's volume in cubic centimeters — end to end, no human in the loop.
 
 *This page covers the volume-estimation pipeline itself. How the ground-truth dataset used to validate it was built is on the companion page: [Building a Metric-Scale Food Dataset with a 3D Scanner]({{ '/projects/food_scanner_dataset/' | relative_url }}).*
+
+</div>
 
 ## Part 1 — Background: nutrition estimation needs a volume
 
@@ -136,11 +140,15 @@ The final pipeline was validated on **20 plated dishes scanned with the POP 4** 
 
 <div class="lang-zh" markdown="1">
 
+<div class="project-overview" markdown="1">
+
 **计算机视觉实习生 · 智界探索科技（深圳）· 2026 年夏**
 
 **一句话概括：** 输入一盘菜的五视角 RGB-D，端到端输出这份食物的体积（立方厘米），全程无需人工干预。
 
 *本页聚焦体积估算流水线本身；验证所用的真值数据集是怎么建出来的，见配套页面：[用 3D 扫描仪构建真实尺度食物数据集]({{ '/projects/food_scanner_dataset/' | relative_url }})。*
+
+</div>
 
 ## 一、项目背景：营养估计缺一个"体积"
 

@@ -10,11 +10,15 @@ toc:
 
 <div class="lang-en" markdown="1">
 
+<div class="project-overview" markdown="1">
+
 **HKUST UROP · Supervisor: Prof. Gary Chan · Sep 2025 – Dec 2025**
 
-> **Status: work in progress.** The full pipeline has been assembled and the core 2D registration module is trained and tested; the final end-to-end evaluation on real scans has not been carried out yet. This page documents the idea, the design, and the intermediate results honestly.
-
 **In one sentence:** given a set of photos of a building's interior, plus one floorplan of that floor, this pipeline reconstructs a 3D point cloud of the space **at real-world scale**.
+
+* **Status: work in progress.** The full pipeline has been assembled and the core 2D registration module is trained and tested; the final end-to-end evaluation on real scans has not been carried out yet. This page documents the idea, the design, and the intermediate results honestly.*
+
+</div>
 
 ## Motivation: point clouds without a ruler
 
@@ -173,11 +177,15 @@ A real reconstructed point cloud from this project (voxel-downsampled from ~8.2M
 
 <div class="lang-zh" markdown="1">
 
+<div class="project-overview" markdown="1">
+
 **香港科技大学 UROP · 导师：Gary Chan 教授 · 2025 年 9 月 – 12 月**
 
-> **状态：进行中。** 完整流水线已经搭建完毕，核心的 2D 配准模块已完成训练与测试；但针对真实扫描数据的端到端最终评估尚未进行。本页如实地记录研究动机、方案设计与阶段性结果。
-
 **一句话概括：** 输入一组建筑内部照片，加上一张该楼层的平面图，输出一个**具有真实尺度**的 3D 点云。
+
+* **状态：进行中。** 完整流水线已经搭建完毕，核心的 2D 配准模块已完成训练与测试；但针对真实扫描数据的端到端最终评估尚未进行。本页如实地记录研究动机、方案设计与阶段性结果。*
+
+</div>
 
 ## 动机：没有尺子的点云
 

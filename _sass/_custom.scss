@@ -63,6 +63,38 @@ html[data-lang="zh"] .lang-en {
   margin-bottom: 1rem;
 }
 
+// Project detail pages: the one-line description under the title duplicates
+// the overview card below it, so hide it there. (The text still feeds the
+// cards on the projects listing page.)
+body:has(#toc-sidebar) .post-header .post-description {
+  display: none;
+}
+
+// The opening block of a project page (role line + one-sentence summary +
+// companion link) is the at-a-glance overview — render it as a card.
+.project-overview {
+  background: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 10px;
+  padding: 0.7rem 1.4rem;
+  margin: 1.6rem 0 2.2rem;
+
+  p {
+    margin: 0.55rem 0;
+  }
+}
+
+// Sub-sections get their own breathing room, and every heading is followed
+// by a clear gap before the content starts.
+.post article h3 {
+  margin-top: 2.4rem;
+}
+
+.post article h2,
+.post article h3 {
+  margin-bottom: 1.05rem;
+}
+
 // Sidebar TOC pages: the gem puts the TOC in a narrow col-sm-3 and tocbot's
 // default stylesheet gives it cramped text and an internal scrollbar. Widen
 // the whole container on large screens, give the sidebar a fixed comfortable
