@@ -4,6 +4,8 @@ title: Floorplan-Guided 3D Point Cloud Reconstruction
 description: "<span class='lang-en'>Aligning and fusing indoor point clouds with 2D floorplan priors for digital twins, robotics, and BIM.</span><span class='lang-zh'>利用 2D 户型图先验对齐与融合室内点云，应用于数字孪生、机器人与 BIM。</span>"
 importance: 3
 category: research
+toc:
+  sidebar: left
 ---
 
 <div class="lang-en" markdown="1">
@@ -22,7 +24,7 @@ Point clouds are the standard 3D representation in industry — digital twins, r
 
 Registering a noisy 3D point cloud directly against a floorplan is hard. Instead, we **project the point cloud top-down into a 2D density map** — walls, which contain most of the points, show up as bright ridges. The 3D-to-floorplan problem then becomes a much friendlier **2D-to-2D image registration** problem: find the rotation, translation, and scale that aligns the density map with the floorplan, then apply that transformation back to the 3D cloud.
 
-<img src="{{ '/assets/img/projects/floorplan/density_map.png' | relative_url }}" alt="From a 3D point cloud to a 2D density map, overlaid with the floorplan" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/density_map.jpg' | relative_url }}" alt="From a 3D point cloud to a 2D density map, overlaid with the floorplan" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">A synthetic example of the core intuition: (a) a 3D point cloud of walls, (b) its top-down density map, (c) the density map aligned with the floorplan outline.</p>
 
 ## Why existing methods fall short
@@ -31,15 +33,15 @@ Registering a noisy 3D point cloud directly against a floorplan is hard. Instead
 
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/vggt_bs3.png' | relative_url }}" alt="VGGT point cloud, batch size 3" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/vggt_bs3.jpg' | relative_url }}" alt="VGGT point cloud, batch size 3" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">VGGT, batch size 3</figcaption>
   </figure>
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/vggt_bs5.png' | relative_url }}" alt="VGGT point cloud, batch size 5" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/vggt_bs5.jpg' | relative_url }}" alt="VGGT point cloud, batch size 5" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">VGGT, batch size 5</figcaption>
   </figure>
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/vggt_gt.png' | relative_url }}" alt="DL3DV-10K ground-truth point cloud" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/vggt_gt.jpg' | relative_url }}" alt="DL3DV-10K ground-truth point cloud" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Ground truth (DL3DV-10K)</figcaption>
   </figure>
 </div>
@@ -47,15 +49,15 @@ Registering a noisy 3D point cloud directly against a floorplan is hard. Instead
 
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/depth_bs3.png' | relative_url }}" alt="VGGT depth, batch size 3" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/depth_bs3.jpg' | relative_url }}" alt="VGGT depth, batch size 3" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">VGGT depth, batch 3</figcaption>
   </figure>
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/depth_bs5.png' | relative_url }}" alt="VGGT depth, batch size 5" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/depth_bs5.jpg' | relative_url }}" alt="VGGT depth, batch size 5" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">VGGT depth, batch 5</figcaption>
   </figure>
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/depth_gt.png' | relative_url }}" alt="Ground-truth depth" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/depth_gt.jpg' | relative_url }}" alt="Ground-truth depth" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Ground-truth depth</figcaption>
   </figure>
 </div>
@@ -65,28 +67,28 @@ Registering a noisy 3D point cloud directly against a floorplan is hard. Instead
 
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:220px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/atrium_pc1.png' | relative_url }}" alt="Incomplete atrium point cloud 1" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/atrium_pc1.jpg' | relative_url }}" alt="Incomplete atrium point cloud 1" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Input 1: partial COLMAP cloud</figcaption>
   </figure>
   <figure style="flex:1; min-width:220px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/atrium_pc2.png' | relative_url }}" alt="Incomplete atrium point cloud 2" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/atrium_pc2.jpg' | relative_url }}" alt="Incomplete atrium point cloud 2" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Input 2: partial COLMAP cloud</figcaption>
   </figure>
 </div>
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:220px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/atrium_merge_normal.png' | relative_url }}" alt="Failed merge, normal view" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/atrium_merge_normal.jpg' | relative_url }}" alt="Failed merge, normal view" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Merged by FPFH+TEASER++, side view</figcaption>
   </figure>
   <figure style="flex:1; min-width:220px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/atrium_merge_bird.png' | relative_url }}" alt="Failed merge, top view" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/atrium_merge_bird.jpg' | relative_url }}" alt="Failed merge, top view" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Merged result, top view — clearly misaligned</figcaption>
   </figure>
 </div>
 
 ## Pipeline
 
-<img src="{{ '/assets/img/projects/floorplan/pipeline.png' | relative_url }}" alt="Pipeline: photos and floorplan to metric-scale point cloud" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/pipeline.png' | relative_url }}" alt="Pipeline: photos and floorplan to metric-scale point cloud" style="width:100%; border-radius:8px;">
 
 The numbered stages in the figure correspond to:
 
@@ -105,44 +107,44 @@ The 2D registration module was trained on an augmented dataset built from the 4t
 
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:150px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/train_p1.png' | relative_url }}" alt="Template keypoints" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/train_p1.jpg' | relative_url }}" alt="Template keypoints" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Template keypoints (floorplan)</figcaption>
   </figure>
   <figure style="flex:1; min-width:150px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/train_p2.png' | relative_url }}" alt="Predicted heatmap on template" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/train_p2.jpg' | relative_url }}" alt="Predicted heatmap on template" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Predicted heatmap, template</figcaption>
   </figure>
   <figure style="flex:1; min-width:150px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/train_p3.png' | relative_url }}" alt="Source keypoints" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/train_p3.jpg' | relative_url }}" alt="Source keypoints" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Source keypoints (density map)</figcaption>
   </figure>
   <figure style="flex:1; min-width:150px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/train_p4.png' | relative_url }}" alt="Predicted heatmap on source" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/train_p4.jpg' | relative_url }}" alt="Predicted heatmap on source" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Predicted heatmap, source</figcaption>
   </figure>
   <figure style="flex:1; min-width:150px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/train_p5.png' | relative_url }}" alt="Keypoint matches" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/train_p5.jpg' | relative_url }}" alt="Keypoint matches" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Keypoint matches</figcaption>
   </figure>
 </div>
 
 <div style="display:flex; gap:2%; flex-wrap:wrap; align-items:flex-start;">
   <figure style="flex:1; min-width:260px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/training_loss.png' | relative_url }}" alt="Training loss curve" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/training_loss.jpg' | relative_url }}" alt="Training loss curve" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">Training loss over 50 epochs — noisy but clearly descending.</figcaption>
   </figure>
   <div style="flex:2; min-width:320px;">
     <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
       <figure style="flex:1; min-width:140px; margin:0 0 8px 0;">
-        <img src="{{ '/assets/img/projects/floorplan/reg_p1.png' | relative_url }}" alt="Template with predicted heatmap" style="width:100%; border-radius:8px;">
+        <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/reg_p1.jpg' | relative_url }}" alt="Template with predicted heatmap" style="width:100%; border-radius:8px;">
         <figcaption style="text-align:center; color:#666; font-size:0.85em;">Template + predicted heatmap</figcaption>
       </figure>
       <figure style="flex:1; min-width:140px; margin:0 0 8px 0;">
-        <img src="{{ '/assets/img/projects/floorplan/reg_p2.png' | relative_url }}" alt="Source with predicted heatmap" style="width:100%; border-radius:8px;">
+        <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/reg_p2.jpg' | relative_url }}" alt="Source with predicted heatmap" style="width:100%; border-radius:8px;">
         <figcaption style="text-align:center; color:#666; font-size:0.85em;">Source + predicted heatmap</figcaption>
       </figure>
       <figure style="flex:1; min-width:140px; margin:0 0 8px 0;">
-        <img src="{{ '/assets/img/projects/floorplan/reg_p3.png' | relative_url }}" alt="Warped source" style="width:100%; border-radius:8px;">
+        <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/reg_p3.jpg' | relative_url }}" alt="Warped source" style="width:100%; border-radius:8px;">
         <figcaption style="text-align:center; color:#666; font-size:0.85em;">Source after applying the predicted transform</figcaption>
       </figure>
     </div>
@@ -155,7 +157,7 @@ The 2D registration module was trained on an augmented dataset built from the 4t
 A real reconstructed point cloud from this project (voxel-downsampled from ~8.2M to ~65k points for the browser; colors are the true RGB values per point — no mesh, no rendering trickery). Drag to rotate, scroll to zoom. If the interactive view fails to load, a static render is shown instead.
 
 <object data="{{ '/assets/plotly/floorplan_pointcloud.html' | relative_url }}" type="text/html" style="width:100%; height:540px; border:1px solid #ddd; border-radius:8px;">
-  <img src="{{ '/assets/img/projects/floorplan/dense1.png' | relative_url }}" alt="Static render of the reconstructed point cloud" style="width:100%; border-radius:8px;">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/dense1.jpg' | relative_url }}" alt="Static render of the reconstructed point cloud" style="width:100%; border-radius:8px;">
 </object>
 <p style="text-align:center; color:#666; font-size:0.9em;">
   <a href="{{ '/assets/plotly/floorplan_pointcloud.html' | relative_url }}" target="_blank">Open the interactive point cloud full-screen ↗</a>
@@ -185,7 +187,7 @@ A real reconstructed point cloud from this project (voxel-downsampled from ~8.2M
 
 把噪声很大的 3D 点云直接和平面图做配准是很困难的。我们的做法是：**把点云俯视投影成一张 2D 密度图**——墙体集中了大部分点，在密度图上呈现为明亮的脊线。于是"3D 点云 vs 平面图"的难题就转化为友好得多的**2D 图像配准**问题：找到把密度图对齐到平面图的旋转、平移与缩放，再把这个变换施加回 3D 点云。
 
-<img src="{{ '/assets/img/projects/floorplan/density_map.png' | relative_url }}" alt="从 3D 点云到 2D 密度图，再与平面图叠加" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/density_map.jpg' | relative_url }}" alt="从 3D 点云到 2D 密度图，再与平面图叠加" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">核心直觉的合成示例：(a) 墙体组成的 3D 点云，(b) 其俯视密度图，(c) 密度图与平面图轮廓对齐叠加。</p>
 
 ## 为什么现有方法不够用
@@ -194,15 +196,15 @@ A real reconstructed point cloud from this project (voxel-downsampled from ~8.2M
 
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/vggt_bs3.png' | relative_url }}" alt="VGGT 点云，batch size 3" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/vggt_bs3.jpg' | relative_url }}" alt="VGGT 点云，batch size 3" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">VGGT，batch size 3</figcaption>
   </figure>
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/vggt_bs5.png' | relative_url }}" alt="VGGT 点云，batch size 5" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/vggt_bs5.jpg' | relative_url }}" alt="VGGT 点云，batch size 5" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">VGGT，batch size 5</figcaption>
   </figure>
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/vggt_gt.png' | relative_url }}" alt="DL3DV-10K 真值点云" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/vggt_gt.jpg' | relative_url }}" alt="DL3DV-10K 真值点云" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">真值（DL3DV-10K）</figcaption>
   </figure>
 </div>
@@ -210,15 +212,15 @@ A real reconstructed point cloud from this project (voxel-downsampled from ~8.2M
 
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/depth_bs3.png' | relative_url }}" alt="VGGT 深度，batch size 3" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/depth_bs3.jpg' | relative_url }}" alt="VGGT 深度，batch size 3" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">VGGT 深度，batch 3</figcaption>
   </figure>
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/depth_bs5.png' | relative_url }}" alt="VGGT 深度，batch size 5" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/depth_bs5.jpg' | relative_url }}" alt="VGGT 深度，batch size 5" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">VGGT 深度，batch 5</figcaption>
   </figure>
   <figure style="flex:1; min-width:180px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/depth_gt.png' | relative_url }}" alt="真值深度" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/depth_gt.jpg' | relative_url }}" alt="真值深度" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">真值深度</figcaption>
   </figure>
 </div>
@@ -228,28 +230,28 @@ A real reconstructed point cloud from this project (voxel-downsampled from ~8.2M
 
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:220px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/atrium_pc1.png' | relative_url }}" alt="中庭残缺点云 1" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/atrium_pc1.jpg' | relative_url }}" alt="中庭残缺点云 1" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">输入 1：COLMAP 残缺点云</figcaption>
   </figure>
   <figure style="flex:1; min-width:220px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/atrium_pc2.png' | relative_url }}" alt="中庭残缺点云 2" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/atrium_pc2.jpg' | relative_url }}" alt="中庭残缺点云 2" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">输入 2：COLMAP 残缺点云</figcaption>
   </figure>
 </div>
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:220px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/atrium_merge_normal.png' | relative_url }}" alt="合并失败，侧视" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/atrium_merge_normal.jpg' | relative_url }}" alt="合并失败，侧视" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">FPFH+TEASER++ 合并结果，侧视</figcaption>
   </figure>
   <figure style="flex:1; min-width:220px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/atrium_merge_bird.png' | relative_url }}" alt="合并失败，俯视" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/atrium_merge_bird.jpg' | relative_url }}" alt="合并失败，俯视" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">合并结果，俯视——错位清晰可见</figcaption>
   </figure>
 </div>
 
 ## 流水线
 
-<img src="{{ '/assets/img/projects/floorplan/pipeline.png' | relative_url }}" alt="流水线：照片与平面图到真实尺度点云" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/pipeline.png' | relative_url }}" alt="流水线：照片与平面图到真实尺度点云" style="width:100%; border-radius:8px;">
 
 图中的编号阶段与下面四步一一对应：
 
@@ -268,44 +270,44 @@ A real reconstructed point cloud from this project (voxel-downsampled from ~8.2M
 
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:150px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/train_p1.png' | relative_url }}" alt="模板关键点" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/train_p1.jpg' | relative_url }}" alt="模板关键点" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">模板关键点（平面图）</figcaption>
   </figure>
   <figure style="flex:1; min-width:150px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/train_p2.png' | relative_url }}" alt="模板预测热力图" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/train_p2.jpg' | relative_url }}" alt="模板预测热力图" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">模板预测热力图</figcaption>
   </figure>
   <figure style="flex:1; min-width:150px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/train_p3.png' | relative_url }}" alt="源关键点" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/train_p3.jpg' | relative_url }}" alt="源关键点" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">源关键点（密度图）</figcaption>
   </figure>
   <figure style="flex:1; min-width:150px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/train_p4.png' | relative_url }}" alt="源预测热力图" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/train_p4.jpg' | relative_url }}" alt="源预测热力图" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">源预测热力图</figcaption>
   </figure>
   <figure style="flex:1; min-width:150px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/train_p5.png' | relative_url }}" alt="关键点匹配" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/train_p5.jpg' | relative_url }}" alt="关键点匹配" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">关键点匹配</figcaption>
   </figure>
 </div>
 
 <div style="display:flex; gap:2%; flex-wrap:wrap; align-items:flex-start;">
   <figure style="flex:1; min-width:260px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/floorplan/training_loss.png' | relative_url }}" alt="训练损失曲线" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/training_loss.jpg' | relative_url }}" alt="训练损失曲线" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">50 个 epoch 的训练损失——有波动但整体明显下降。</figcaption>
   </figure>
   <div style="flex:2; min-width:320px;">
     <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
       <figure style="flex:1; min-width:140px; margin:0 0 8px 0;">
-        <img src="{{ '/assets/img/projects/floorplan/reg_p1.png' | relative_url }}" alt="模板与预测热力图" style="width:100%; border-radius:8px;">
+        <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/reg_p1.jpg' | relative_url }}" alt="模板与预测热力图" style="width:100%; border-radius:8px;">
         <figcaption style="text-align:center; color:#666; font-size:0.85em;">模板 + 预测热力图</figcaption>
       </figure>
       <figure style="flex:1; min-width:140px; margin:0 0 8px 0;">
-        <img src="{{ '/assets/img/projects/floorplan/reg_p2.png' | relative_url }}" alt="源与预测热力图" style="width:100%; border-radius:8px;">
+        <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/reg_p2.jpg' | relative_url }}" alt="源与预测热力图" style="width:100%; border-radius:8px;">
         <figcaption style="text-align:center; color:#666; font-size:0.85em;">源 + 预测热力图</figcaption>
       </figure>
       <figure style="flex:1; min-width:140px; margin:0 0 8px 0;">
-        <img src="{{ '/assets/img/projects/floorplan/reg_p3.png' | relative_url }}" alt="变换后的源" style="width:100%; border-radius:8px;">
+        <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/reg_p3.jpg' | relative_url }}" alt="变换后的源" style="width:100%; border-radius:8px;">
         <figcaption style="text-align:center; color:#666; font-size:0.85em;">施加预测变换后的源</figcaption>
       </figure>
     </div>
@@ -318,7 +320,7 @@ A real reconstructed point cloud from this project (voxel-downsampled from ~8.2M
 本项目真实重建的点云（为浏览器展示用体素降采样从约 817 万点压到约 6.5 万点；颜色是每个点的真实 RGB——没有网格、没有渲染修饰）。拖动旋转，滚轮缩放。若交互视图加载失败，会自动显示一张静态渲染图。
 
 <object data="{{ '/assets/plotly/floorplan_pointcloud.html' | relative_url }}" type="text/html" style="width:100%; height:540px; border:1px solid #ddd; border-radius:8px;">
-  <img src="{{ '/assets/img/projects/floorplan/dense1.png' | relative_url }}" alt="重建点云的静态渲染" style="width:100%; border-radius:8px;">
+  <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/floorplan/dense1.jpg' | relative_url }}" alt="重建点云的静态渲染" style="width:100%; border-radius:8px;">
 </object>
 <p style="text-align:center; color:#666; font-size:0.9em;">
   <a href="{{ '/assets/plotly/floorplan_pointcloud.html' | relative_url }}" target="_blank">全屏打开交互式点云 ↗</a>

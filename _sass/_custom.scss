@@ -40,3 +40,25 @@ html[data-lang="zh"] .lang-en {
     transform: translateY(4px);
   }
 }
+
+// Project detail pages: give sections breathing room and a dashed divider,
+// so the boundary between sections is visible at a glance.
+.post article h2 {
+  margin-top: 3.4rem;
+  padding-top: 1.8rem;
+  border-top: 1px dashed var(--global-divider-color);
+}
+
+// The first heading of a language block follows the intro directly — no divider.
+.post article .lang-en > h2:first-of-type,
+.post article .lang-zh > h2:first-of-type,
+.post article > h2:first-of-type {
+  margin-top: 1.8rem;
+  padding-top: 0;
+  border-top: 0;
+}
+
+// Figures follow the same rhythm as text sections.
+.post article figure {
+  margin-bottom: 1rem;
+}

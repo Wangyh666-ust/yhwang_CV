@@ -4,6 +4,8 @@ title: Metric-Scale 3D Food Reconstruction for Nutrition Estimation
 description: "<span class='lang-en'>An end-to-end pipeline that turns five RGB-D views of a plated dish into a metric volume estimate — MAPE 12.36% against scanner ground truth, beating the company's single-view baseline of ~25%.</span><span class='lang-zh'>端到端流水线：输入装盘食物的五视角 RGB-D，输出真实尺度体积——对扫描仪真值 MAPE 12.36%，优于公司单视角基线的约 25%。</span>"
 importance: 1
 category: projects
+toc:
+  sidebar: left
 ---
 
 <div class="lang-en" markdown="1">
@@ -20,7 +22,7 @@ The company maintains **CN5K**, a dataset of plated Chinese dishes, each capture
 
 The nutrition pipeline works as **volume × density → weight → nutrition**. Density comes from food-category priors; the missing piece was an accurate, automated way to get the **volume** of the food on a plate. That was my task: five images in, volume out.
 
-<img src="{{ '/assets/img/projects/food_volume/input_grid.jpg' | relative_url }}" alt="Five-view capture setup: grid of masked food photos" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/input_grid.jpg' | relative_url }}" alt="Five-view capture setup: grid of masked food photos" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">What the input looks like: a grid of five-view captures (validation set with fiducial dice markers; red overlay = food mask). Each capture is RGB + depth + confidence + intrinsics per view.</p>
 
 ## Choosing the reconstruction front-end
@@ -36,7 +38,7 @@ The result was a classic accuracy-vs-bias trade-off:
 
 ## Pipeline
 
-<img src="{{ '/assets/img/projects/food_volume/pipeline.png' | relative_url }}" alt="End-to-end pipeline: five-view RGB-D to volume" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/pipeline.png' | relative_url }}" alt="End-to-end pipeline: five-view RGB-D to volume" style="width:100%; border-radius:8px;">
 
 The numbered stages correspond to:
 
@@ -48,28 +50,28 @@ The numbered stages correspond to:
 6. **Rim fitting**: the container rim is fit with a **superellipse** (circle / ellipse / rounded rectangle) under a battery of priors — height bands, rim width, ring constraints — and the side walls are interpolated (xy linear, z quadratic) to complete the hidden inner surface.
 7. **Height-field integration**: food surface minus container support surface, integrated on a 2 mm grid.
 
-<img src="{{ '/assets/img/projects/food_volume/container_priors.png' | relative_url }}" alt="Bowl cross-section priors: visible rim, inner wall, inferred inner bottom" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/container_priors.png' | relative_url }}" alt="Bowl cross-section priors: visible rim, inner wall, inferred inner bottom" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">The container priors in one cross-section: the visible rim (inner edge R), the inner wall (q² curve), the inferred inner-bottom edge B, the hidden support surface, and the table plane (Z = 0). The food volume is what sits between the food surface and this reconstructed support surface.</p>
 
 **How well does the container reconstruction work?** Against POP 4 scanner ground truth, the reconstructed plates and bowls line up closely (blue = VGGT + RoMa, orange = Pi3X + RoMa, with per-container MAE):
 
-<img src="{{ '/assets/img/projects/food_volume/container_vs_gt.jpg' | relative_url }}" alt="Reconstructed containers vs POP 4 scanner ground truth, six plates and bowls" style="width:60%; display:block; margin:0 auto; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/container_vs_gt.jpg' | relative_url }}" alt="Reconstructed containers vs POP 4 scanner ground truth, six plates and bowls" style="width:60%; display:block; margin:0 auto; border-radius:8px;">
 
 ## Case studies
 
 **How to read these panels:** each case shows, left to right, the representative overhead RGB → the VLM + SAM 3 semantic overlay (food in orange, container in blue) → the final 2 mm height grid from which the volume is integrated.
 
-<img src="{{ '/assets/img/projects/food_volume/case_shrimp.png' | relative_url }}" alt="Case study: braised shrimp — RGB, semantic overlay, height grid" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/case_shrimp.jpg' | relative_url }}" alt="Case study: braised shrimp — RGB, semantic overlay, height grid" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">Braised shrimp on a plate: estimated volume 425.97 cm³. The height grid correctly captures the uneven piling of the shrimp.</p>
 
-<img src="{{ '/assets/img/projects/food_volume/case_rice.png' | relative_url }}" alt="Case study: rice bowl — RGB, semantic overlay, height grid" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/case_rice.jpg' | relative_url }}" alt="Case study: rice bowl — RGB, semantic overlay, height grid" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">A bowl of rice: estimated volume 472.27 cm³ — see the density sanity check below for why this number is believable.</p>
 
 ## The ×1.09 correction — honestly
 
 The phone's **raw metric depth systematically underestimates**. I swept a global multiplier from 1.05 to 1.11 over the 20-case validation set (split into first-10 / last-10 to check stability):
 
-<img src="{{ '/assets/img/projects/food_volume/multiplier_sweep.png' | relative_url }}" alt="Sweep of the raw-depth multiplier from 1.05 to 1.11, MAPE per split" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/multiplier_sweep.png' | relative_url }}" alt="Sweep of the raw-depth multiplier from 1.05 to 1.11, MAPE per split" style="width:100%; border-radius:8px;">
 
 MAPE bottoms out around **×1.08–1.09** and the minimum is consistent across both halves of the data, so I adopted **×1.09**. Two honest caveats: this factor carries an **overfitting risk** (it is fit on 20 samples), and the remaining error concentrates in **small volumes**, which are still underestimated.
 
@@ -77,7 +79,7 @@ MAPE bottoms out around **×1.08–1.09** and the minimum is consistent across b
 
 Two gates keep unreliable data out of the pipeline: a **data gate** on tags and depth quality, and the **VLM gate**, which actively refused 40% of the cases it was shown — a rejected case is far cheaper than a wrong volume.
 
-<img src="{{ '/assets/img/projects/food_volume/gating_funnel.png' | relative_url }}" alt="Gating funnel: 5859 cases to 348 valid volumes" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/gating_funnel.png' | relative_url }}" alt="Gating funnel: 5859 cases to 348 valid volumes" style="width:100%; border-radius:8px;">
 
 ## Validation against scanner ground truth
 
@@ -91,7 +93,7 @@ The final pipeline was validated on **20 plated dishes scanned with the POP 4** 
 
 Volume alone is hard to eyeball, so I cross-checked it against weight: for ten rice sessions, the implied bulk density averages **0.714 g/cm³** (pooled 0.721) — comfortably inside the plausible range for cooked rice (~0.6–1.06 g/cm³). The volumes are not just self-consistent; they make physical sense.
 
-<img src="{{ '/assets/img/projects/food_volume/rice_density.png' | relative_url }}" alt="Implied bulk density of rice across ten sessions" style="width:70%; display:block; margin:0 auto; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/rice_density.png' | relative_url }}" alt="Implied bulk density of rice across ten sessions" style="width:70%; display:block; margin:0 auto; border-radius:8px;">
 
 ## A bad case, shown honestly
 
@@ -99,11 +101,11 @@ Volume alone is hard to eyeball, so I cross-checked it against weight: for ten r
 
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:280px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/food_volume/badcase_panel.png' | relative_url }}" alt="Bad case panel: guilinggao" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/badcase_panel.jpg' | relative_url }}" alt="Bad case panel: guilinggao" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">The case panel: dark, glossy food flush with the bowl.</figcaption>
   </figure>
   <figure style="flex:1; min-width:280px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/food_volume/badcase_bowl_pc.png' | relative_url }}" alt="Bad case point cloud: straight-walled bowl" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/badcase_bowl_pc.jpg' | relative_url }}" alt="Bad case point cloud: straight-walled bowl" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">The reconstructed bowl point cloud, side view — visible layering near the rim.</figcaption>
   </figure>
 </div>
@@ -131,7 +133,7 @@ Volume alone is hard to eyeball, so I cross-checked it against weight: for ten r
 
 营养估计的链路是**体积 × 密度 → 重量 → 营养**。密度由食物类别先验给出，缺的正是一个准确、自动获取**盘中食物体积**的方法。这就是我的任务：五张图进，体积出。
 
-<img src="{{ '/assets/img/projects/food_volume/input_grid.jpg' | relative_url }}" alt="五视角采集：带 mask 的食物照片网格" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/input_grid.jpg' | relative_url }}" alt="五视角采集：带 mask 的食物照片网格" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">输入数据长这样：五视角采集网格（验证集带骰子标志点；红色叠加 = 食物 mask）。每次采集每个视角都有 RGB + 深度 + 置信度 + 内参。</p>
 
 ## 前端重建模型选型
@@ -147,7 +149,7 @@ Volume alone is hard to eyeball, so I cross-checked it against weight: for ten r
 
 ## 流水线
 
-<img src="{{ '/assets/img/projects/food_volume/pipeline.png' | relative_url }}" alt="端到端流水线：五视角 RGB-D 到体积" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/pipeline.png' | relative_url }}" alt="端到端流水线：五视角 RGB-D 到体积" style="width:100%; border-radius:8px;">
 
 图中编号对应以下步骤：
 
@@ -159,28 +161,28 @@ Volume alone is hard to eyeball, so I cross-checked it against weight: for ten r
 6. **沿口拟合**：容器沿口用**超椭圆**（圆 / 椭圆 / 圆角矩形）拟合，配合一系列先验（高度带、沿口宽度、环带约束），侧壁用插值补全（xy 线性、z 二次），还原出被食物遮住的容器内表面。
 7. **高度场积分**：食物表面减去容器支撑面，在 2 mm 网格上积分得到体积。
 
-<img src="{{ '/assets/img/projects/food_volume/container_priors.png' | relative_url }}" alt="碗的剖面先验：可见上口、内壁、推断内底" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/container_priors.png' | relative_url }}" alt="碗的剖面先验：可见上口、内壁、推断内底" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">一张剖面图看懂容器先验：可见上口（内沿 R）、内壁（q² 曲线）、推断的内底边沿 B、隐藏的支撑面、桌面（Z = 0）。食物体积就是食物表面与这个重建出的支撑面之间的部分。</p>
 
 **容器重建的效果如何？** 与 POP 4 扫描真值对比，重建出的盘和碗贴合得很好（蓝 = VGGT + RoMa，橙 = Pi3X + RoMa，附各容器 MAE）：
 
-<img src="{{ '/assets/img/projects/food_volume/container_vs_gt.jpg' | relative_url }}" alt="容器重建 vs POP 4 扫描真值，六组盘碗" style="width:60%; display:block; margin:0 auto; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/container_vs_gt.jpg' | relative_url }}" alt="容器重建 vs POP 4 扫描真值，六组盘碗" style="width:60%; display:block; margin:0 auto; border-radius:8px;">
 
 ## 案例研究
 
 **这些面板怎么看：** 每个案例从左到右依次是：代表性俯视 RGB → VLM + SAM 3 语义叠加图（橙色 = 食物，蓝色 = 容器）→ 用于积分体积的 2 mm 高度场网格。
 
-<img src="{{ '/assets/img/projects/food_volume/case_shrimp.png' | relative_url }}" alt="案例：油焖大虾——RGB、语义叠加、高度场" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/case_shrimp.jpg' | relative_url }}" alt="案例：油焖大虾——RGB、语义叠加、高度场" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">油焖大虾（装盘）：估计体积 425.97 cm³。高度场正确刻画了虾堆叠的起伏。</p>
 
-<img src="{{ '/assets/img/projects/food_volume/case_rice.png' | relative_url }}" alt="案例：米饭——RGB、语义叠加、高度场" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/case_rice.jpg' | relative_url }}" alt="案例：米饭——RGB、语义叠加、高度场" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">一碗米饭：估计体积 472.27 cm³——这个数字为什么可信，见下面的密度合理性检查。</p>
 
 ## ×1.09 修正——如实地讲
 
 手机的**原始公制深度存在系统性低估**。我在 20 个验证样本上对全局乘子从 1.05 到 1.11 做了扫描（按先后拆成前 10 / 后 10 两组检验稳定性）：
 
-<img src="{{ '/assets/img/projects/food_volume/multiplier_sweep.png' | relative_url }}" alt="深度乘子 1.05–1.11 扫描，各组 MAPE" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/multiplier_sweep.png' | relative_url }}" alt="深度乘子 1.05–1.11 扫描，各组 MAPE" style="width:100%; border-radius:8px;">
 
 MAPE 在 **×1.08–1.09** 处见底，且最小值在两半数据上一致，因此采用 **×1.09**。两个诚实的提醒：这个系数有**过拟合风险**（只在 20 个样本上拟合）；残余误差集中在**小体积**区间，那里仍然低估。
 
@@ -188,7 +190,7 @@ MAPE 在 **×1.08–1.09** 处见底，且最小值在两半数据上一致，�
 
 两道门控把不可靠数据挡在流水线之外：按标签与深度质量的**数据门控**，以及 **VLM 门控**——后者主动拒绝了 40% 的送检样本。拒识一个样本的代价远小于输出一个错误体积。
 
-<img src="{{ '/assets/img/projects/food_volume/gating_funnel.png' | relative_url }}" alt="门控漏斗：5859 个 case 到 348 个有效体积" style="width:100%; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/gating_funnel.png' | relative_url }}" alt="门控漏斗：5859 个 case 到 348 个有效体积" style="width:100%; border-radius:8px;">
 
 ## 用扫描仪真值做验证
 
@@ -202,7 +204,7 @@ MAPE 在 **×1.08–1.09** 处见底，且最小值在两半数据上一致，�
 
 单看体积数字很难直觉判断对错，于是我用重量交叉验证：十个米饭 session 推算出的堆积密度均值为 **0.714 g/cm³**（总体重除以总体积为 0.721）——落在熟米饭的合理区间（约 0.6–1.06 g/cm³）内。体积不仅自洽，物理上也讲得通。
 
-<img src="{{ '/assets/img/projects/food_volume/rice_density.png' | relative_url }}" alt="十个 session 的米饭堆积密度" style="width:70%; display:block; margin:0 auto; border-radius:8px;">
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/rice_density.png' | relative_url }}" alt="十个 session 的米饭堆积密度" style="width:70%; display:block; margin:0 auto; border-radius:8px;">
 
 ## 如实展示一个 bad case
 
@@ -210,11 +212,11 @@ MAPE 在 **×1.08–1.09** 处见底，且最小值在两半数据上一致，�
 
 <div style="display:flex; gap:1.5%; flex-wrap:wrap;">
   <figure style="flex:1; min-width:280px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/food_volume/badcase_panel.png' | relative_url }}" alt="bad case 面板：龟苓膏" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/badcase_panel.jpg' | relative_url }}" alt="bad case 面板：龟苓膏" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">案例面板：深色、反光、与碗齐平的食物。</figcaption>
   </figure>
   <figure style="flex:1; min-width:280px; margin:0 0 8px 0;">
-    <img src="{{ '/assets/img/projects/food_volume/badcase_bowl_pc.png' | relative_url }}" alt="bad case 点云：直上直下的碗" style="width:100%; border-radius:8px;">
+    <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/badcase_bowl_pc.jpg' | relative_url }}" alt="bad case 点云：直上直下的碗" style="width:100%; border-radius:8px;">
     <figcaption style="text-align:center; color:#666; font-size:0.85em;">重建碗点云侧视——沿口附近可见分层。</figcaption>
   </figure>
 </div>

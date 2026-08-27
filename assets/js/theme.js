@@ -448,6 +448,28 @@ let toggleLanguageSetting = () => {
   setLanguageSetting(determineLanguageSetting() === "zh" ? "en" : "zh");
 };
 
+// TOC language filter (local addition): on bilingual pages the tocbot sidebar
+// picks up headings from both .lang-en and .lang-zh. Hide the entries whose
+// target heading belongs to the currently inactive language, and re-apply on
+// every language switch.
+let applyTocLanguageFilter = () => {
+  const toc = document.getElementById("toc-sidebar");
+  if (!toc) return;
+  const lang = document.documentElement.getAttribute("data-lang") || "en";
+  toc.querySelectorAll(".toc-link").forEach((link) => {
+    const href = link.getAttribute("href") || "";
+    if (!href.startsWith("#")) return;
+    const heading = document.getElementById(decodeURIComponent(href.slice(1)));
+    if (!heading) return;
+    const item = link.closest("li");
+    if (!item) return;
+    const inZh = heading.closest(".lang-zh") !== null;
+    const inEn = heading.closest(".lang-en") !== null;
+    if (!inZh && !inEn) return; // monolingual page: leave visible
+    item.style.display = (inZh ? "zh" : "en") === lang ? "" : "none";
+  });
+};
+
 let initLanguage = () => {
   // Apply the attribute immediately (this file loads in <head>) to avoid a
   // language flash; the dictionary pass runs once the DOM exists.
@@ -462,8 +484,14 @@ let initLanguage = () => {
     if (langToggle) {
       langToggle.addEventListener("click", function () {
         toggleLanguageSetting();
+        applyTocLanguageFilter();
       });
     }
+
+    // tocbot (common.js) builds the sidebar on DOMContentLoaded too, and script
+    // order is not guaranteed — re-filter once everything has settled.
+    applyTocLanguageFilter();
+    window.addEventListener("load", applyTocLanguageFilter);
   });
 };
 
