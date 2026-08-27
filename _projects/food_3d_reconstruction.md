@@ -38,14 +38,21 @@ The result was a classic accuracy-vs-bias trade-off:
 
 ## Pipeline
 
-<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/pipeline.png' | relative_url }}" alt="End-to-end pipeline: five-view RGB-D to volume" style="width:100%; border-radius:8px;">
+My design doc presented the pipeline as two flow diagrams — a **front half** (five views to a metric point cloud) and a **back half** (point cloud to volume) — and this page keeps the same structure. The two diagrams below are the originals from that doc (in Chinese; the walkthrough beneath each translates and explains).
 
-The numbered stages correspond to:
+**Front half — five views → metric point cloud:**
+
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/pipeline_frontend.jpg' | relative_url }}" alt="Front-end flow: five-view RGB-D, VLM gate, SAM 3 masks, Pi3X joint inference, scale recovery" style="width:100%; border-radius:8px;">
 
 1. **VLM gate**: a vision-language model checks the container type, food type, and their spatial relationship — unsuitable cases are rejected outright rather than silently producing garbage.
 2. **SAM 3 segmentation**: food / container / table masks, guided by the VLM's bounding boxes with an IoU cross-check.
 3. **Pi3X joint inference**: all five views are reconstructed in one shared coordinate frame — point maps, camera poses, and per-point confidence.
 4. **Scale recovery**: raw metric depth is scaled by an empirical factor (×1.09, see below), then low-confidence regions are fused by taking the per-region q50 depth and aggregating across views with a five-view median.
+
+**Back half — point cloud → volume:**
+
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/pipeline_backend.jpg' | relative_url }}" alt="Back-end flow: table coordinate frame and rim fitting, container type priors, support surface, height-field integration" style="width:100%; border-radius:8px;">
+
 5. **Container type**: the VLM distinguishes plate vs. bowl, which determines the inner-bottom height prior (plates: fixed ~13 mm; bowls: a linear function of rim diameter, ~14±4 mm).
 6. **Rim fitting**: the container rim is fit with a **superellipse** (circle / ellipse / rounded rectangle) under a battery of priors — height bands, rim width, ring constraints — and the side walls are interpolated (xy linear, z quadratic) to complete the hidden inner surface.
 7. **Height-field integration**: food surface minus container support surface, integrated on a 2 mm grid.
@@ -149,14 +156,21 @@ Volume alone is hard to eyeball, so I cross-checked it against weight: for ten r
 
 ## 流水线
 
-<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/pipeline.png' | relative_url }}" alt="端到端流水线：五视角 RGB-D 到体积" style="width:100%; border-radius:8px;">
+我在设计文档里就是把流程画成两张图的——**前半段**（五视角 → 公制点云）和**后处理**（点云 → 体积），这里也沿用同样的介绍方式。下面两张就是文档里的原图。
 
-图中编号对应以下步骤：
+**前半段——五视角 → 公制点云：**
+
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/pipeline_frontend.jpg' | relative_url }}" alt="前半段流程：五视角 RGB-D、VLM 门控、SAM 3 分割、Pi3X 联合推理、尺度恢复" style="width:100%; border-radius:8px;">
 
 1. **VLM 门控**：视觉语言模型检查容器类型、食物类型及两者的摆放关系——不合格的样本直接拒识，而不是默默输出垃圾结果。
 2. **SAM 3 分割**：在 VLM 给出的 bbox 引导下分割食物 / 容器 / 桌面，并用 IoU 交叉校验。
 3. **Pi3X 联合推理**：五个视角在同一共享坐标系下重建——point maps、相机位姿、逐点置信度。
 4. **尺度恢复**：原始公制深度先乘经验系数（×1.09，见下文），低置信区域取区域 q50 深度，再跨视角取五视角中位数完成融合。
+
+**后处理——点云 → 体积：**
+
+<img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/pipeline_backend.jpg' | relative_url }}" alt="后处理流程：桌面坐标系与上口拟合、容器类型先验、支撑面构建、高度场积分" style="width:100%; border-radius:8px;">
+
 5. **容器类型判断**：VLM 区分盘 / 碗，由此确定内底高度先验（盘：固定约 13 mm；碗：与口径线性相关，约 14±4 mm）。
 6. **沿口拟合**：容器沿口用**超椭圆**（圆 / 椭圆 / 圆角矩形）拟合，配合一系列先验（高度带、沿口宽度、环带约束），侧壁用插值补全（xy 线性、z 二次），还原出被食物遮住的容器内表面。
 7. **高度场积分**：食物表面减去容器支撑面，在 2 mm 网格上积分得到体积。
