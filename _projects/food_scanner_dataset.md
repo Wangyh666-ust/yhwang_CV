@@ -12,15 +12,19 @@ toc:
 
 **Computer Vision Intern · Zhijie Exploration Technology (深圳智界探索), Shenzhen · Summer 2026**
 
-> This page covers the **ground-truth dataset**. The companion page [Metric-Scale 3D Food Reconstruction]({{ '/projects/food_3d_reconstruction/' | relative_url }}) covers the volume-estimation pipeline this dataset was built to validate.
-
 **In one sentence:** the company needed trustworthy, true-scale food volumes as ground truth — I surveyed the scanner market, ran a head-to-head experiment between the two best-fit consumer scanners, and built an automated pipeline that turned the winner into a 90-sample dataset.
 
-## Why a scanner at all
+*This page covers the ground-truth dataset. The volume-estimation pipeline it was built to validate is on the companion page: [Metric-Scale 3D Food Reconstruction]({{ '/projects/food_3d_reconstruction/' | relative_url }}).*
+
+## Part 1 — Background: why a scanner at all
 
 Estimating food volume from photos needs something to be validated **against** — and the company had no accurate, true-scale food point clouds to serve as ground truth. Following the approach of **MetaFood3D** (a reference food 3D dataset), I established that a consumer-grade 3D scanner could play this role, then set out to pick the right one.
 
-## Survey: how depth sensors see
+## Part 2 — What I did
+
+The work splits into four parts: survey how scanners actually perform, run a head-to-head between the two finalists, quantify the costs of the choice, and automate the winner into a dataset.
+
+### 2.1 Survey: how depth sensors see
 
 I surveyed the four main depth-sensing principles — **passive stereo, structured light, ToF, and dToF** — and, more importantly for us, the practical difference between **infrared and blue-light** scanning: published and measured volume errors run about **5% for infrared vs. ≤3% for blue light**.
 
@@ -37,7 +41,7 @@ To check the claims against reality, I ran a hands-on test at a Creality store: 
   </figure>
 </div>
 
-## Head-to-head: MIRACO PLUS vs. POP 4
+### 2.2 Head-to-head: MIRACO PLUS vs. POP 4
 
 The shortlist came down to two scanners: **MIRACO PLUS** and **POP 4**. I ran a controlled comparison on the same set of objects.
 
@@ -61,7 +65,7 @@ The shortlist came down to two scanners: **MIRACO PLUS** and **POP 4**. I ran a 
 
 **Practical factors** sealed the decision: POP 4 scans a single object in **2–3 minutes** (MIRACO needs at least 5), costs about **a third** as much (~¥6.3k vs. ~¥17.9k), and handles **dark and reflective** foods better. **Decision: POP 4.**
 
-## The trade-offs we accepted
+### 2.3 The trade-offs we accepted
 
 No choice is free, and this one came with two known costs, which I quantified rather than hand-waved:
 
@@ -73,7 +77,7 @@ No choice is free, and this one came with two known costs, which I quantified ra
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_dataset/plated_mesh.jpg' | relative_url }}" alt="POP 4 scan of a plated dish" style="width:70%; display:block; margin:0 auto; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">A plated dish scanned with POP 4 — food and container captured together, which is exactly the geometry the volume pipeline must reason about.</p>
 
-## Automating capture: a three-script chain
+### 2.4 Automating capture: a three-script chain
 
 Hand-driving the scanner software for ~100 objects does not scale, so I wrapped the whole workflow in **three automation scripts**, with every step logged to a `manifest.csv`:
 
@@ -83,7 +87,7 @@ Hand-driving the scanner software for ~100 objects does not scale, so I wrapped 
 2. **Script 0 — auto denoise**: RANSAC plane fitting plus statistical outlier removal, with a large model as the fallback judge for ambiguous cases, writing to `processed/`.
 3. **Script 2 — GUI auto-fuse**: fuses the cleaned point clouds into meshes in `fused/`.
 
-## The dataset
+### 2.5 The dataset
 
 The pipeline produced the final ground-truth dataset:
 
@@ -92,7 +96,7 @@ The pipeline produced the final ground-truth dataset:
 
 This dataset became the ground truth for validating the five-view volume-estimation pipeline — see the [companion page]({{ '/projects/food_3d_reconstruction/' | relative_url }}) for how the 20 plated dishes were used to measure its accuracy (final MAPE 12.36%).
 
-## Limitations
+## Part 3 — Limitations and reflections
 
 - The **−3.2% plated bias** is characterized but not eliminated — the container's reflective surface and food shifting are the suspected causes.
 - Meshes are **not watertight**; fine for volume ground truth, but they would need repair for other uses.
@@ -104,15 +108,19 @@ This dataset became the ground truth for validating the five-view volume-estimat
 
 **计算机视觉实习生 · 智界探索科技（深圳）· 2026 年夏**
 
-> 本页讲**真值数据集**。配套页面[真实尺度 3D 食物重建]({{ '/projects/food_3d_reconstruction/' | relative_url }})讲这个数据集所要验证的体积估算流水线。
-
 **一句话概括：** 公司需要可信的、真实尺度的食物体积作为真值——我调研了扫描仪市场，对两款最符合需求的消费级扫描仪做了正面对比实验，并为胜出者搭建了自动化采集链路，产出 90 个样本的数据集。
 
-## 为什么需要扫描仪
+*本页聚焦真值数据集本身；这个数据集所要验证的体积估算流水线，见配套页面：[真实尺度 3D 食物重建]({{ '/projects/food_3d_reconstruction/' | relative_url }})。*
+
+## 一、项目背景：为什么需要扫描仪
 
 从照片估计食物体积，总得有个东西可以拿来**对答案**——而公司手里没有精确的、真实尺度的食物点云可以当真值。参照 **MetaFood3D**（一个参考性的食物 3D 数据集）的建库方式，我论证了消费级 3D 扫描仪可以承担这个角色，接下来就是挑一台合适的。
 
-## 调研：深度传感器怎么"看"东西
+## 二、我做了什么
+
+工作分成四个部分：调研扫描仪的真实水平，对两款入围机型做正面对比，量化这个选择的代价，最后把胜出者自动化成一个数据集。
+
+### 2.1 调研：深度传感器怎么"看"东西
 
 我调研了四大深度感知原理——**被动双目、结构光、ToF、dToF**——以及对我们更关键的实际差异：**红外 vs 蓝光**扫描：公开资料与实测的体积误差大约是**红外 5% vs 蓝光 ≤3%**。
 
@@ -129,7 +137,7 @@ This dataset became the ground truth for validating the five-view volume-estimat
   </figure>
 </div>
 
-## 正面对比：MIRACO PLUS vs. POP 4
+### 2.2 正面对比：MIRACO PLUS vs. POP 4
 
 候选最后落在两款扫描仪上：**MIRACO PLUS** 和 **POP 4**。我用同一批物体做了对照实验。
 
@@ -153,7 +161,7 @@ This dataset became the ground truth for validating the five-view volume-estimat
 
 **实用因素**最终拍板：POP 4 单扫一个物体只需 **2–3 分钟**（MIRACO 至少 5 分钟），价格约为**三分之一**（~¥6.3k vs ~¥17.9k），对**深色、反光**食物的适应性也更好。**结论：选 POP 4。**
 
-## 我们接受的代价
+### 2.3 我们接受的代价
 
 任何选择都有成本，这一个有两项——我选择量化它们而不是含糊带过：
 
@@ -165,7 +173,7 @@ This dataset became the ground truth for validating the five-view volume-estimat
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_dataset/plated_mesh.jpg' | relative_url }}" alt="POP 4 扫描的装盘食物" style="width:70%; display:block; margin:0 auto; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">POP 4 扫描的装盘食物——食物与容器一起入模，这正是体积流水线需要推理的几何形态。</p>
 
-<!--## 自动化采集：三脚本链路
+### 2.4 自动化采集：三脚本链路
 
 手动开扫描软件处理上百个物体是行不通的，于是我把整个流程包进**三个自动化脚本**，每一步都写入 `manifest.csv` 留痕：
 
@@ -173,9 +181,9 @@ This dataset became the ground truth for validating the five-view volume-estimat
 
 1. **脚本 1——GUI 自动扫描**：驱动 Revo Scan 界面逐物体采集，存入 `raw/`。
 2. **脚本 0——自动去噪**：RANSAC 平面拟合加统计离群点剔除，模糊个案由大模型兜底判断，输出到 `processed/`。
-3. **脚本 2——GUI 自动融合**：把干净的点云融合成网格，存入 `fused/`。-->
+3. **脚本 2——GUI 自动融合**：把干净的点云融合成网格，存入 `fused/`。
 
-## 数据集成果
+### 2.5 数据集成果
 
 这条链路产出了最终的真值数据集：
 
@@ -184,9 +192,10 @@ This dataset became the ground truth for validating the five-view volume-estimat
 
 这个数据集成为五视角体积估算流水线的验证真值——20 个装盘样本如何用来测量流水线精度（最终 MAPE 12.36%），见[配套页面]({{ '/projects/food_3d_reconstruction/' | relative_url }})。
 
-## 工作反思
+## 三、局限与工作反思
 
 - 数据集的**质量门控**一直没有很好的定义，都是肉眼观测决定数据是否能够入库，并没有形成标准化的门控机制。
+- **装盘样本 −3.2% 的系统性偏差**已被刻画但未消除——容器反光与食物挪动是疑似原因。
 - 扫描的网格**不一定水密**。
 - 出现重影的装盘扫描仍需**人工发现并重扫**——自动化链路还不能自己识别。
 

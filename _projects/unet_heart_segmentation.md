@@ -16,20 +16,24 @@ toc:
 
 > The exchange project was scoped for **4 people**; in the end **2 of us** carried it, and in 49 days we completed the first two of the three planned stages. What the third stage would have been — and why we stopped — is at the end of this page.
 
-## The goal: from one X-ray to the heart's 3D pose
+## Part 1 — Background: the goal and the plan
 
 A heart's shape and orientation carry diagnostic information — a thickened left ventricle (hypertrophy), for example, shows up as an abnormally shaped silhouette on a chest X-ray. The program's research question was ambitious: **from a single chest X-ray, determine whether the heart's shape, position, and axial orientation are normal** — which ultimately means reasoning about 3D structure from a 2D projection.
 
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/unet/xray_features.jpg' | relative_url }}" alt="Typical chest X-ray features: left ventricle hypertrophy and shape variety" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">Why this is hard even for humans: hearts and lungs vary widely across patients (right), and pathologies like left-ventricle hypertrophy change the silhouette (left).</p>
 
-## The three-stage plan
+**The three-stage plan:**
 
 1. **Make the data.** Real annotated medical data is scarce and confidential — so we built a synthetic factory: assemble a human torso from **2,746 anatomical OBJ models** in Blender, simulate the X-ray imaging physics, and get unlimited images **with perfect ground-truth masks for free**.
 2. **Learn 2D segmentation.** Train a U-Net on the synthetic chest X-rays, then test on **real, hand-labeled** chest X-rays: does the model correctly locate the heart?
 3. **Lift to 3D (not reached).** Extend the 2D position and axis information back into 3D body space — one X-ray in, a verdict on the heart's 3D shape/position/orientation out.
 
-## Stage 1 — a synthetic X-ray factory
+## Part 2 — What we built
+
+Stages 1 and 2 were completed; stage 3 was designed but not reached. This is what each stage involved.
+
+### 2.1 Stage 1 — a synthetic X-ray factory
 
 Two problems had to be solved: X-ray imaging is a physics process (not visible light), and one fixed body would give one fixed image.
 
@@ -48,7 +52,7 @@ Two problems had to be solved: X-ray imaging is a physics process (not visible l
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/unet/synth_cyclegan.jpg' | relative_url }}" alt="Raw gvxr simulation vs CycleGAN-enhanced result" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">Left: raw gvxr output. Right: after CycleGAN — noticeably closer to a real radiograph's texture.</p>
 
-## Stage 2 — U-Net from synthetic to real
+### 2.2 Stage 2 — U-Net from synthetic to real
 
 We built the segmentation model after the original U-Net paper (Ronneberger et al.): a downsampling path captures features, an upsampling path regenerates the image at full resolution, and skip connections preserve fine detail.
 
@@ -70,7 +74,7 @@ Three training details mattered:
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/unet/manual_mask.jpg' | relative_url }}" alt="A real chest X-ray and its hand-drawn heart mask" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">A real chest X-ray (left) and its hand-drawn ground-truth heart mask (right).</p>
 
-## Results on real X-rays
+### 2.3 Results on real X-rays
 
 The model — which had only ever trained on synthetic data — was evaluated on real chest X-rays against our hand-drawn masks:
 
@@ -82,7 +86,7 @@ The model — which had only ever trained on synthetic data — was evaluated on
 
 **Honest caveats:** the heart metrics are measured against masks we drew ourselves — a small, self-labeled test set, not clinical ground truth. And the model was tested on the same X-ray style it saw during CycleGAN adaptation; truly out-of-distribution hospital scans remain an open question.
 
-## What stage 3 would have taken
+## Part 3 — What stage 3 would have taken
 
 The final stage — lifting the 2D detection into a 3D estimate of heart position, axis, and shape for abnormality diagnosis — was designed but not built: 49 days and 2 people were enough for stages 1–2 only. What it would need next:
 
@@ -100,20 +104,24 @@ The final stage — lifting the 2D detection into a 3D estimate of heart positio
 
 > 这个交换项目原本按 **4 人**规模规划，最后实际由 **2 人**完成；49 天内我们完成了原计划三个阶段中的前两个。第三阶段是什么、为什么停下来，见本页末尾。
 
-## 目标：从一张 X 光到心脏的 3D 位姿
+## 一、项目背景：目标与计划
 
 心脏的形状与朝向携带诊断信息——例如左心室增厚（肥大）会在胸片上表现为异常轮廓。项目的研究问题相当有野心：**从一张胸腔 X 光，判断心脏的形状、位置、轴向是否正常**——这本质上是从 2D 投影推理 3D 结构。
 
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/unet/xray_features.jpg' | relative_url }}" alt="典型胸片特征：左心室肥大与形态多样性" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">这件事对人类都难：不同病人的心肺形态差异很大（右），左心室肥大等病变会改变轮廓（左）。</p>
 
-## 三阶段计划
+**三阶段计划：**
 
 1. **造数据。** 真实标注的医疗数据稀缺且涉密——所以我们搭了一座合成工厂：在 Blender 里用 **2746 个人体解剖 OBJ 模型**拼装躯干，模拟 X 光成像物理，得到无限多的图像，并且**免费附带完美的真值掩膜**。
 2. **学 2D 分割。** 在合成胸片上训练 U-Net，然后在**真实、人工标注**的胸片上测试：模型能正确定位心脏吗？
 3. **升到 3D（未完成）。** 把 2D 的位置与轴向信息反推回三维人体空间——一张 X 光输入，输出心脏 3D 形状/位置/朝向是否正常的判断。
 
-## 第一阶段——合成 X 光工厂
+## 二、我们做了什么
+
+三个阶段完成了前两个；第三个完成了设计但没有实现。各部分如下。
+
+### 2.1 第一阶段——合成 X 光工厂
 
 要解决两个问题：X 光成像是物理过程（不是可见光渲染）；而且一个固定的身体只能生成一张固定的图。
 
@@ -132,7 +140,7 @@ The final stage — lifting the 2D detection into a 3D estimate of heart positio
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/unet/synth_cyclegan.jpg' | relative_url }}" alt="gvxr 原始仿真图 vs CycleGAN 增强结果" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">左：gvxr 原始输出。右：经过 CycleGAN——质感明显更接近真实 X 光。</p>
 
-## 第二阶段——U-Net 从合成走向真实
+### 2.2 第二阶段——U-Net 从合成走向真实
 
 分割模型按 U-Net 原论文（Ronneberger 等）搭建：下采样路径提取特征，上采样路径重建全分辨率图像，跳跃连接保留细节。
 
@@ -154,7 +162,7 @@ The final stage — lifting the 2D detection into a 3D estimate of heart positio
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/unet/manual_mask.jpg' | relative_url }}" alt="真实胸片与手工绘制的心脏掩膜" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">一张真实胸片（左）与手工绘制的真值心脏掩膜（右）。</p>
 
-## 在真实 X 光上的结果
+### 2.3 在真实 X 光上的结果
 
 这个只在合成数据上训练过的模型，在真实胸片上对照我们手绘的掩膜做了评估：
 
@@ -166,7 +174,7 @@ The final stage — lifting the 2D detection into a 3D estimate of heart positio
 
 **诚实的提醒：** 心脏指标是对照我们自己手绘的掩膜测的——这是一个小规模、自标注的测试集，不是临床金标准。而且模型测试时所见的是它经 CycleGAN 适配过的同类 X 光风格；真正分布外的医院影像仍是未知数。
 
-## 第三阶段还差什么
+## 三、第三阶段还差什么
 
 最后一个阶段——把 2D 检测结果提升为心脏 3D 位置、轴向与形状的估计，用于异常诊断——完成了设计但没有实现：49 天、2 个人只够完成前两阶段。接下来需要：
 
