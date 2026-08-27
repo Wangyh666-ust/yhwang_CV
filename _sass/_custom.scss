@@ -62,3 +62,41 @@ html[data-lang="zh"] .lang-en {
 .post article figure {
   margin-bottom: 1rem;
 }
+
+// Sidebar TOC pages: the gem puts the TOC in a narrow col-sm-3 and tocbot's
+// default stylesheet gives it cramped text and an internal scrollbar. Widen
+// the whole container on large screens, give the sidebar a fixed comfortable
+// width, remove the internal scroll, and open up the entry typography.
+#toc-sidebar {
+  overflow: visible !important;
+  max-height: none !important;
+
+  .toc-list {
+    overflow: visible !important;
+    padding-left: 0;
+  }
+
+  .toc-link {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0.4rem 0.4rem 0.4rem 0.75rem;
+  }
+}
+
+@media (min-width: 992px) {
+  body:has(#toc-sidebar) .container[role="main"] {
+    max-width: min(1560px, 94vw);
+  }
+
+  .row:has(#toc-sidebar) > .col-sm-3 {
+    flex: 0 0 290px;
+    width: 290px;
+    max-width: 290px;
+  }
+
+  .row:has(#toc-sidebar) > .col-sm-9 {
+    flex: 1 1 0;
+    width: auto;
+    max-width: none;
+  }
+}
