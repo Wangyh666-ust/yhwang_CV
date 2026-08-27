@@ -74,7 +74,7 @@ My design doc presented the pipeline as two flow diagrams — a **front half** (
 <object data="{{ '/assets/plotly/food_case_shrimp.html' | relative_url }}" type="text/html" style="width:100%; height:520px; border:1px solid #ddd; border-radius:8px;">
   <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/case_shrimp.jpg' | relative_url }}" alt="Static panel of the braised shrimp case" style="width:100%; border-radius:8px;">
 </object>
-<p style="text-align:center; color:#666; font-size:0.9em;">The fused RGB point cloud of the same shrimp case (voxel-downsampled to ~43k points for the browser; per-point true colors, no mesh). Drag to rotate, scroll to zoom — <a href="{{ '/assets/plotly/food_case_shrimp.html' | relative_url }}" target="_blank">open full-screen ↗</a></p>
+<p style="text-align:center; color:#666; font-size:0.9em;">The fused RGB point cloud of the same shrimp case (voxel-downsampled to ~78k points for the browser; per-point true colors, no mesh). Drag to rotate, scroll to zoom — <a href="{{ '/assets/plotly/food_case_shrimp.html' | relative_url }}" target="_blank">open full-screen ↗</a></p>
 
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/case_rice.jpg' | relative_url }}" alt="Case study: rice bowl — RGB, semantic overlay, height grid" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">A bowl of rice: estimated volume 472.27 cm³ — see the density sanity check below for why this number is believable.</p>
@@ -82,7 +82,7 @@ My design doc presented the pipeline as two flow diagrams — a **front half** (
 <object data="{{ '/assets/plotly/food_case_rice.html' | relative_url }}" type="text/html" style="width:100%; height:520px; border:1px solid #ddd; border-radius:8px;">
   <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/case_rice.jpg' | relative_url }}" alt="Static panel of the rice case" style="width:100%; border-radius:8px;">
 </object>
-<p style="text-align:center; color:#666; font-size:0.9em;">The fused RGB point cloud of the same rice case (~44k points). Note how the rice mound rises above the bowl rim — that dome is what the height grid integrates. <a href="{{ '/assets/plotly/food_case_rice.html' | relative_url }}" target="_blank">Open full-screen ↗</a></p>
+<p style="text-align:center; color:#666; font-size:0.9em;">The fused RGB point cloud of the same rice case (~73k points). Note how the rice mound rises above the bowl rim — that dome is what the height grid integrates. <a href="{{ '/assets/plotly/food_case_rice.html' | relative_url }}" target="_blank">Open full-screen ↗</a></p>
 
 ## The ×1.09 correction — honestly
 
@@ -202,7 +202,7 @@ Volume alone is hard to eyeball, so I cross-checked it against weight: for ten r
 <object data="{{ '/assets/plotly/food_case_shrimp.html' | relative_url }}" type="text/html" style="width:100%; height:520px; border:1px solid #ddd; border-radius:8px;">
   <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/case_shrimp.jpg' | relative_url }}" alt="油焖大虾案例的静态面板" style="width:100%; border-radius:8px;">
 </object>
-<p style="text-align:center; color:#666; font-size:0.9em;">同一个虾案例融合后的 RGB 点云（为浏览器展示体素降采样到约 4.3 万点；逐点真彩，无网格）。拖动旋转，滚轮缩放——<a href="{{ '/assets/plotly/food_case_shrimp.html' | relative_url }}" target="_blank">全屏打开 ↗</a></p>
+<p style="text-align:center; color:#666; font-size:0.9em;">同一个虾案例融合后的 RGB 点云（为浏览器展示体素降采样到约 7.8 万点；逐点真彩，无网格）。拖动旋转，滚轮缩放——<a href="{{ '/assets/plotly/food_case_shrimp.html' | relative_url }}" target="_blank">全屏打开 ↗</a></p>
 
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/case_rice.jpg' | relative_url }}" alt="案例：米饭——RGB、语义叠加、高度场" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">一碗米饭：估计体积 472.27 cm³——这个数字为什么可信，见下面的密度合理性检查。</p>
@@ -210,7 +210,7 @@ Volume alone is hard to eyeball, so I cross-checked it against weight: for ten r
 <object data="{{ '/assets/plotly/food_case_rice.html' | relative_url }}" type="text/html" style="width:100%; height:520px; border:1px solid #ddd; border-radius:8px;">
   <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/food_volume/case_rice.jpg' | relative_url }}" alt="米饭案例的静态面板" style="width:100%; border-radius:8px;">
 </object>
-<p style="text-align:center; color:#666; font-size:0.9em;">同一个米饭案例的 RGB 点云（约 4.4 万点）。可以看清米饭隆起高出碗沿的圆顶——高度场积分的就是它。<a href="{{ '/assets/plotly/food_case_rice.html' | relative_url }}" target="_blank">全屏打开 ↗</a></p>
+<p style="text-align:center; color:#666; font-size:0.9em;">同一个米饭案例的 RGB 点云（约 7.3 万点）。可以看清米饭隆起高出碗沿的圆顶——高度场积分的就是它。<a href="{{ '/assets/plotly/food_case_rice.html' | relative_url }}" target="_blank">全屏打开 ↗</a></p>
 
 ## ×1.09 修正——如实地讲
 
