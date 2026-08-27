@@ -19,3 +19,6 @@ vendor
 # Python bytecode from bin/ helper scripts
 __pycache__/
 *.pyc
+
+# Raw CV/project source material (large PDFs, 200MB+ ply scans)
+CV_info/

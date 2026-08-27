@@ -1,0 +1,42 @@
+// Local style overrides for this site.
+// Loaded last via assets/css/main.scss, so these rules win over gem defaults.
+
+// al_folio_core styles `.projects h2.category` with --global-divider-color,
+// which is barely visible. Use the regular text color instead.
+.projects h2.category {
+  color: var(--global-text-color);
+}
+
+// Bilingual toggle: content wrapped in .lang-en / .lang-zh is shown
+// according to the data-lang attribute on <html> (set by theme.js).
+html[data-lang="en"] .lang-zh {
+  display: none !important;
+}
+html[data-lang="zh"] .lang-en {
+  display: none !important;
+}
+
+// Language toggle button — same borderless, hover-colored style as
+// #light-toggle / #search-toggle in the gem's _navbar.scss.
+#language-toggle {
+  padding: 0;
+  border: 0;
+  background-color: inherit;
+  color: var(--global-text-color);
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: var(--global-hover-color);
+  }
+}
+
+@media (min-width: 576px) {
+  #language-toggle {
+    transform: translateY(4px);
+  }
+}

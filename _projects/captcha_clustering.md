@@ -4,6 +4,7 @@ title: Clustering-Based CAPTCHA Model
 description: A clustering-based CAPTCHA model built in pure NumPy, applicable for human authorization.
 importance: 1
 category: projects
+published: false
 ---
 
 **Machine Learning Project · Oct 2024 – Dec 2024**

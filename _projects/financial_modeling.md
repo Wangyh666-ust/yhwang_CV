@@ -4,6 +4,7 @@ title: Financial Data Analysis & Quantitative Modeling
 description: Portfolio optimization with the Markowitz mean-variance and Black-Litterman models, plus pandas-based time-series analysis.
 importance: 4
 category: projects
+published: false
 ---
 
 **Self-Study · Summer 2025**

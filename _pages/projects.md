@@ -2,7 +2,7 @@
 layout: page
 title: PROJECTS
 permalink: /projects/
-description: Selected research and course projects — click any card for the full detail page.
+description: "<span class='lang-en'>Selected research and course projects — click any card for the full detail page.</span><span class='lang-zh'>精选的科研与课程项目——点击任意卡片查看详情页。</span>"
 nav: true
 nav_order: 3
 display_categories: [research, projects]

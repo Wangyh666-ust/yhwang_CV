@@ -4,6 +4,7 @@ title: Excel-Like Data Structure in C++
 description: A data structure mimicking Excel behavior using BST and hashtable for efficient data storage.
 importance: 3
 category: projects
+published: false
 ---
 
 **C++ Project · May 2025**
