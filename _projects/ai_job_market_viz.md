@@ -60,7 +60,7 @@ Raw job counts mislead: a huge category with a huge automation risk is not "dema
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/dataviz/jobcount.jpg' | relative_url }}" alt="Circle packing of risk-weighted job count by subcategory" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">Circle area encodes risk-weighted job count (raw count × average automation risk). Pick a category to compare its subcategories.</p>
 
-### 2.4 What should *you* optimize for? — a personalized scorecard
+### 2.4 What should you optimize for? — a personalized scorecard
 
 The final stop hands the analysis to the visitor: a **draggable pie chart** sets weights over six factors — salary, AI intensity, automation risk, reskilling need, displacement risk, skill complexity — and the industry and regional rankings re-compute live. Everyone's "best industry" is different; this lets the chart reflect what matters to *you*.
 
@@ -129,7 +129,7 @@ The final stop hands the analysis to the visitor: a **draggable pie chart** sets
 <img loading="lazy" decoding="async" src="{{ '/assets/img/projects/dataviz/jobcount.jpg' | relative_url }}" alt="按子类别的风险加权岗位数圆形堆积图" style="width:100%; border-radius:8px;">
 <p style="text-align:center; color:#666; font-size:0.9em;">圆面积编码风险加权岗位数（原始数量 × 平均自动化风险）。选择大类即可对比其子类别。</p>
 
-### 2.4 *你*最该看重什么？——个性化记分卡
+### 2.4 你最该看重什么？——个性化记分卡
 
 最后一站把分析权交给访问者：一个**可拖动的饼图**用来设置六个因素的权重——薪资、AI 强度、自动化风险、再培训需求、替代风险、技能复杂度——行业榜和地区榜随之实时重算。每个人的"最佳行业"都不同，这张图让答案反映你自己的偏好。
 
